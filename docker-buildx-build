@@ -1,0 +1,23 @@
+#!/bin/bash
+
+KUBECTL_VERSION=v1.20.5
+[ -n "$1" ] && KUBECTL_VERSION="$1"
+
+ALPINE_VERSION=3.12
+[ -n "$2" ] && ALPINE_VERSION="$2"
+
+REGISTRY=gcr.io
+REPOSITORY=jarvice
+PLATFORMS="linux/amd64,linux/arm64,linux/ppc64le"
+
+BUILDER=multiarch
+
+export DOCKER_CLI_EXPERIMENTAL=enabled
+docker buildx build --rm \
+    --builder $BUILDER \
+    --platform $PLATFORMS --push \
+    --build-arg KUBECTL_VERSION=$KUBECTL_VERSION \
+    --build-arg ALPINE_VERSION=$ALPINE_VERSION \
+    -t $REGISTRY/$REPOSITORY/jarvice-kubectl:$KUBECTL_VERSION \
+    -f Dockerfile .
+
