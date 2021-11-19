@@ -6,8 +6,8 @@ KUBECTL_VERSION=v1.20.5
 ALPINE_VERSION=3.12
 [ -n "$2" ] && ALPINE_VERSION="$2"
 
-REGISTRY=gcr.io
-REPOSITORY=jarvice
+REGISTRY=us-docker.pkg.dev
+REPOSITORY=jarvice/images
 PLATFORMS="linux/amd64,linux/arm64,linux/ppc64le"
 
 BUILDER=multiarch
